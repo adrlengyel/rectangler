@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">rectangler</string>
+    <string name="play_button">Hraj</string>
+    <string name="options_button">Nastavenia</string>
+    <string name="quit_button">Koniec</string>
+</resources>

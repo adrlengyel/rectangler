@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220sp"
+        android:text="@string/app_name"
+        android:textSize="28sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pixel"
+    />
+
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="80sp"
+        android:text="@string/play_button"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pixel"
+        android:backgroundTint="@color/white"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <Button
+        android:id="@+id/btnOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnPlay"
+        android:layout_marginTop="20sp"
+        android:text="@string/options_button"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pixel"
+        android:backgroundTint="@color/white"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <Button
+        android:id="@+id/btnQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnOptions"
+        android:layout_marginTop="20sp"
+        android:text="@string/quit_button"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pixel"
+        android:backgroundTint="@color/white"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+</RelativeLayout>
