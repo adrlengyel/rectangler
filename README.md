@@ -1,2 +1,2 @@
 # rectangler
-Android pixelstyle game
+black and white pixelart style android game
