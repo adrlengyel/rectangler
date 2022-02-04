@@ -17,4 +17,85 @@
         android:fontFamily="@font/pixel"
         />
 
+    <TextView
+        android:id="@+id/tvVolume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOptions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100sp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/volume"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <SeekBar
+        android:id="@+id/sbVolume"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvVolume"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:progressBackgroundTint="@color/black"
+        android:progressTint="@color/black"
+        android:thumb="@drawable/square"
+        android:thumbTint="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sbVolume"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50sp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/language"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:id="@+id/rgLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLanguage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp">
+
+        <RadioButton
+            android:id="@+id/rbEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:fontFamily="@font/pixel"
+            android:minHeight="48dp"
+            android:text="@string/english" />
+
+        <RadioButton
+            android:id="@+id/rbSlovak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:fontFamily="@font/pixel"
+            android:minHeight="48dp"
+            android:text="@string/slovak" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rgLanguage"
+        android:layout_marginTop="25sp"
+        android:padding="20sp"
+        android:text="@string/save"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pixel"
+        android:backgroundTint="@color/white"
+        android:textAllCaps="false"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
 </RelativeLayout>

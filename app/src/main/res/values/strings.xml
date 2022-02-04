@@ -4,4 +4,10 @@
     <string name="play_button">Hraj</string>
     <string name="options_button">Nastavenia</string>
     <string name="quit_button">Koniec</string>
+    <string name="volume">Zvuk</string>
+    <string name="save">Ulož</string>
+    <string name="language">Jazyk</string>
+    <string name="english">Angličtina</string>
+    <string name="slovak">Slovenčina</string>
+    <string name="saved_text">Nastavenia boli uložene</string>
 </resources>

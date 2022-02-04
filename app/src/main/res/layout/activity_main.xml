@@ -10,12 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220sp"
-        android:text="@string/app_name"
-        android:textSize="35sp"
-        android:textColor="@color/black"
+        android:layout_marginTop="180sp"
         android:fontFamily="@font/pixel"
-    />
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
 
     <Button
         android:id="@+id/btnPlay"
