@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 public class Player {
 
-    boolean movingLeft, movingRight;
+    boolean movingLeft, movingRight, isShooting;
     int x, y, playerWidth, playerHeight;
     Bitmap player;
 
@@ -25,7 +25,7 @@ public class Player {
         player = Bitmap.createScaledBitmap(player, playerWidth, playerHeight, false);
 
         x = (screenX / 2) - (playerWidth / 2);
-        y = (int) (GameView.screenYRatio * (screenX + 250));
+        y = (int) (GameView.screenYRatio * (screenX + 2 * (playerHeight)));
 
     }
 

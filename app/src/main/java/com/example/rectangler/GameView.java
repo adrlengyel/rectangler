@@ -89,6 +89,11 @@ public class GameView extends SurfaceView implements Runnable{
             player.x += 10 * screenXRatio;
         }
 
+        if(player.isShooting){
+            player.y -= 10 * screenXRatio;
+        }
+
+
         if(player.x < 0){
             player.x = 0;
         }
@@ -131,18 +136,22 @@ public class GameView extends SurfaceView implements Runnable{
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                if(event.getX() < screenSizeX / 2){
+                if(event.getX() < screenSizeX / 2 - player.playerWidth){
                     player.movingLeft = true;
                     player.movingRight = false;
                 }
-                else if(event.getX() > screenSizeX / 2){
+                else if(event.getX() > screenSizeX / 2 + player.playerWidth){
                     player.movingRight = true;
                     player.movingLeft = false;
+                }
+                if(event.getX() >= (screenSizeX / 2) - player.playerWidth &&  event.getX() <= (screenSizeX / 2) + player.playerWidth){
+                    player.isShooting = true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 player.movingRight = false;
                 player.movingLeft = false;
+                player.isShooting = false;
                 break;
         }
 

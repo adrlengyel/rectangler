@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50sp"
-        android:text="@string/options_button"
-        android:textSize="35sp"
-        android:textColor="@color/black"
         android:fontFamily="@font/pixel"
-        />
+        android:text="@string/options_button"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
 
     <TextView
         android:id="@+id/tvVolume"
@@ -83,19 +82,18 @@
 
     <Button
         android:id="@+id/btnSave"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/rgLanguage"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="25sp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/pixel"
         android:padding="20sp"
         android:text="@string/save"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/pixel"
-        android:backgroundTint="@color/white"
         android:textAllCaps="false"
-        style="?android:attr/borderlessButtonStyle"
-        />
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 </RelativeLayout>
