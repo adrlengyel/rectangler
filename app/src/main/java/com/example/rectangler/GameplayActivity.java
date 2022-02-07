@@ -28,7 +28,7 @@ public class GameplayActivity extends AppCompatActivity {
 
         music = MediaPlayer.create(GameplayActivity.this, R.raw.background_song);
         music.setLooping(true);
-        music.start();
+        //music.start();
     }
 
     @Override

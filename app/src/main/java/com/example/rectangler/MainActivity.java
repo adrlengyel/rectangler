@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,12 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnPlay, btnOptions, btnQuit;
+    private Button btnPlay, btnOptions, btnQuit, btnCredits;
     private TextView tvTitle;
     private String currentLanguageCode, filePath, fileName;
     private Context context;
     private Resources resources;
+    private MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                music.stop();
                 Intent intent = new Intent(MainActivity.this, GameplayActivity.class);
                 startActivity(intent);
             }
@@ -49,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnCredits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreditsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,12 +67,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        music = MediaPlayer.create(MainActivity.this, R.raw.mainmenu_song);
+        music.setVolume(100, 100);
+        music.setLooping(true);
+        music.start();
     }
 
     private void inicialize(){
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
         btnOptions = (Button) findViewById(R.id.btnOptions);
+        btnCredits = (Button) findViewById(R.id.btnCredits);
         btnQuit = (Button) findViewById(R.id.btnQuit);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
 
@@ -109,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvTitle.setText(resources.getString(R.string.app_name));
         btnPlay.setText(resources.getString(R.string.play_button));
+        btnCredits.setText(resources.getString(R.string.credits_button));
         btnOptions.setText(resources.getString(R.string.options_button));
         btnQuit.setText(resources.getString(R.string.quit_button));
 
@@ -117,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        music.start();
         if(checkIfFileExists("config.txt")){
             if(readFile()){
                 changeLocale();
             }
         }
-
     }
+
 }

@@ -2,6 +2,7 @@
 <resources>
     <string name="play_button">Play</string>
     <string name="options_button">Options</string>
+    <string name="credits_button">Credits</string>
     <string name="quit_button">Quit</string>
     <string name="volume">Volume</string>
     <string name="save">Save</string>
@@ -9,4 +10,5 @@
     <string name="english">English</string>
     <string name="slovak">Slovak</string>
     <string name="saved_text">Changes have been saved</string>
+    <string name="loading_text">10. ročník súťaže IHRA</string>
 </resources>

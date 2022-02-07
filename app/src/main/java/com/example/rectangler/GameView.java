@@ -87,9 +87,9 @@ public class GameView extends SurfaceView implements Runnable{
         }
 
         if(player.movingLeft){
-            player.x -= (int) (10.0 * screenXRatio);
+            player.x -= (int) (20.0 * screenXRatio);
         } else if (player.movingRight) {
-            player.x += (int) (10.0 * screenXRatio);
+            player.x += (int) (20.0 * screenXRatio);
         }
 
         if(player.x < 0){

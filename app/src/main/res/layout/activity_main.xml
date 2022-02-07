@@ -1,67 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvTitle"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180sp"
-        android:fontFamily="@font/pixel"
-        android:text="@string/app_name"
-        android:textColor="@color/black"
-        android:textSize="35sp" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="80sp"
-        android:padding="20sp"
-        android:text="@string/play_button"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/pixel"
-        android:backgroundTint="@color/white"
-        style="?android:attr/borderlessButtonStyle"
-        />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/pixel"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="35sp" />
 
-    <Button
-        android:id="@+id/btnOptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnPlay"
-        android:layout_marginTop="10sp"
-        android:padding="20sp"
-        android:text="@string/options_button"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/pixel"
-        android:backgroundTint="@color/white"
-        style="?android:attr/borderlessButtonStyle"
-        />
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginTop="80sp"
+            android:padding="20sp"
+            android:text="@string/play_button"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pixel"
+            android:backgroundTint="@color/white"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
-    <Button
-        android:id="@+id/btnQuit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnOptions"
-        android:layout_marginTop="10sp"
-        android:padding="20sp"
-        android:text="@string/quit_button"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/pixel"
-        android:backgroundTint="@color/white"
-        style="?android:attr/borderlessButtonStyle"
-        />
+        <Button
+            android:id="@+id/btnOptions"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnPlay"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/pixel"
+            android:padding="20sp"
+            android:text="@string/options_button"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnCredits"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnOptions"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/pixel"
+            android:padding="20sp"
+            android:text="@string/options_button"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnQuit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btnCredits"
+            android:layout_marginTop="10sp"
+            android:padding="20sp"
+            android:text="@string/quit_button"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pixel"
+            android:backgroundTint="@color/white"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditsActivity"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgUPJS"
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:background="@drawable/upjs_logo"/>
+
+        <TextView
+            android:id="@+id/tvUPJS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:layout_below="@+id/imgUPJS"
+            android:fontFamily="@font/pixel"
+            android:text="@string/upjs"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imgSPSE"
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:layout_below="@+id/tvUPJS"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40sp"
+            android:background="@drawable/spseke_logo" />
+
+        <TextView
+            android:id="@+id/tvSPSE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:layout_below="@+id/imgSPSE"
+            android:fontFamily="@font/pixel"
+            android:text="@string/spse"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
