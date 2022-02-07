@@ -3,6 +3,7 @@ package com.example.rectangler;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.ImageView;
@@ -14,7 +15,7 @@ public class GameView extends SurfaceView implements Runnable{
 
     private Thread thread;
     private boolean isPaused;
-    private int screenSizeX, screenSizeY;
+    public int screenSizeX, screenSizeY;
     public static float screenXRatio, screenYRatio;
     private Background bgStart, bgNext;
     private Player player;
@@ -26,8 +27,8 @@ public class GameView extends SurfaceView implements Runnable{
 
         this.screenSizeX = screenSizeX;
         this.screenSizeY = screenSizeY;
-        screenYRatio = 1920f / screenSizeY;
-        screenXRatio = 1080f / screenSizeX;
+        screenYRatio = (float)screenSizeY / 1920.0f;
+        screenXRatio = (float)screenSizeX / 1080.0f;
 
         bgStart = new Background(screenSizeX, screenSizeY, getResources());
         bgNext = new Background(screenSizeX, screenSizeY, getResources());
@@ -74,8 +75,8 @@ public class GameView extends SurfaceView implements Runnable{
 
     private void update(){
 
-        bgStart.y -= 4;// * screenYRatio;
-        bgNext.y -= 4;// * screenYRatio;
+        bgStart.y -= (int) (4.0 * screenYRatio);
+        bgNext.y -= (int) (4.0 * screenYRatio);
 
         if(bgStart.y + bgStart.background.getHeight() < 0){
             bgStart.y = screenSizeY;
@@ -86,9 +87,9 @@ public class GameView extends SurfaceView implements Runnable{
         }
 
         if(player.movingLeft){
-            player.x -= 10 * screenXRatio;
+            player.x -= (int) (10.0 * screenXRatio);
         } else if (player.movingRight) {
-            player.x += 10 * screenXRatio;
+            player.x += (int) (10.0 * screenXRatio);
         }
 
         if(player.x < 0){
@@ -106,7 +107,7 @@ public class GameView extends SurfaceView implements Runnable{
                 bulletsToRemove.add(bullet);
             }
 
-            bullet.y -= 10 * screenYRatio;
+            bullet.y -= (int) (20.0 * screenYRatio);
 
         }
 
@@ -128,10 +129,9 @@ public class GameView extends SurfaceView implements Runnable{
 
             canvas.drawBitmap(player.getPlayer(), player.x, player.y, paint);
 
-            for(Bullet bullet : bullets){
+            for(Bullet bullet : bullets) {
                 canvas.drawBitmap(bullet.bullet, bullet.x, bullet.y, paint);
             }
-
             getHolder().unlockCanvasAndPost(canvas);
 
         }
@@ -159,7 +159,8 @@ public class GameView extends SurfaceView implements Runnable{
             player.movingRight = true;
             player.movingLeft = false;
         }
-        if(event.getX() >= (screenSizeX / 2) - player.playerWidth &&  event.getX() <= (screenSizeX / 2) + player.playerWidth){
+        if(event.getX() >= ((screenSizeX / 2) - player.playerWidth) - 10
+                &&  event.getX() <= ((screenSizeX / 2) + player.playerWidth) + 10){
             player.shots++;
         }
 

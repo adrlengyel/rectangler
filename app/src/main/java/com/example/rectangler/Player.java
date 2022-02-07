@@ -43,7 +43,7 @@ public class Player {
         bullet2 = Bitmap.createScaledBitmap(bullet1, bullet1.getWidth(), bullet1.getHeight(), false);
 
         x = (screenX / 2) - (playerWidth / 2);
-        y = (int) (GameView.screenYRatio * (screenX + 2 * (playerHeight)));
+        y = (int) (gameView.screenSizeY - (playerHeight + 35));
 
     }
 

@@ -174,12 +174,12 @@ public class OptionsActivity extends AppCompatActivity {
 
     private void changeLanguage(){
 
-        tvOptions.setText(R.string.options_button);
-        tvVolume.setText(R.string.volume);
-        tvLanguage.setText(R.string.language);
-        rbEnglish.setText(R.string.english);
-        rbSlovak.setText(R.string.slovak);
-        btnSave.setText(R.string.save);
+        tvOptions.setText(resources.getString(R.string.options_button));
+        tvVolume.setText(resources.getString(R.string.volume));
+        tvLanguage.setText(resources.getString(R.string.language));
+        rbEnglish.setText(resources.getString(R.string.english));
+        rbSlovak.setText(resources.getString(R.string.slovak));
+        btnSave.setText(resources.getString(R.string.save));
 
     }
 }

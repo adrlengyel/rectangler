@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeLanguage(){
 
-        tvTitle.setText(R.string.app_name);
-        btnPlay.setText(R.string.play_button);
-        btnOptions.setText(R.string.options_button);
-        btnQuit.setText(R.string.quit_button);
+        tvTitle.setText(resources.getString(R.string.app_name));
+        btnPlay.setText(resources.getString(R.string.play_button));
+        btnOptions.setText(resources.getString(R.string.options_button));
+        btnQuit.setText(resources.getString(R.string.quit_button));
 
     }
 
