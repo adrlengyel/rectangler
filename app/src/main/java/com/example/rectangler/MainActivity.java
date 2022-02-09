@@ -66,11 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 finishAndRemoveTask();
             }
         });
-
-        music = MediaPlayer.create(MainActivity.this, R.raw.mainmenu_song);
-        music.setVolume(100, 100);
-        music.setLooping(true);
-        music.start();
     }
 
     private void inicialize(){
@@ -134,12 +129,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        music.start();
         if(checkIfFileExists("config.txt")){
             if(readFile()){
                 changeLocale();
             }
         }
+        music = MediaPlayer.create(MainActivity.this, R.raw.mainmenu_song);
+        music.setLooping(true);
+        music.start();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        music.stop();
+    }
 }

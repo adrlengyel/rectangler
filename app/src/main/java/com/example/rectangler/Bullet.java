@@ -3,13 +3,14 @@ package com.example.rectangler;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 public class Bullet {
 
-    int x, y, bulletWidth, bulletHeight;
-    Bitmap bullet;
+    public int x, y, bulletWidth, bulletHeight;
+    public Bitmap bullet;
 
-    Bullet(Resources resources){
+    public Bullet(Resources resources){
 
         bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet);
         bulletWidth = bullet.getWidth();
@@ -19,7 +20,10 @@ public class Bullet {
         bulletHeight = (int) (bulletHeight * GameView.screenYRatio);
 
         bullet = Bitmap.createScaledBitmap(bullet, bullet.getWidth(), bullet.getHeight(), false);
+    }
 
+    public Rect getCollision(){
+        return new Rect(x, y, x + bulletWidth, y + bulletHeight);
     }
 
 }

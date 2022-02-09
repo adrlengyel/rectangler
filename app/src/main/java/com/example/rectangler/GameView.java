@@ -3,6 +3,7 @@ package com.example.rectangler;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -10,25 +11,27 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameView extends SurfaceView implements Runnable{
 
     private Thread thread;
-    private boolean isPaused;
+    private boolean isPaused, GameOver = false;
     public int screenSizeX, screenSizeY;
     public static float screenXRatio, screenYRatio;
     private Background bgStart, bgNext;
     private Player player;
     private Paint paint;
     private List<Bullet> bullets;
+    private Enemy[] enemies;
 
     public GameView(Context context, int screenSizeX, int screenSizeY) {
         super(context);
 
         this.screenSizeX = screenSizeX;
         this.screenSizeY = screenSizeY;
-        screenYRatio = (float)screenSizeY / 1920.0f;
-        screenXRatio = (float)screenSizeX / 1080.0f;
+        screenYRatio = 1920f / (float)screenSizeY;
+        screenXRatio = 1080f / (float)screenSizeX;
 
         bgStart = new Background(screenSizeX, screenSizeY, getResources());
         bgNext = new Background(screenSizeX, screenSizeY, getResources());
@@ -41,14 +44,21 @@ public class GameView extends SurfaceView implements Runnable{
         paint = new Paint();
 
         bullets = new ArrayList<Bullet>();
+        enemies = new Enemy[5];
 
+        for(int i = 0; i < 5; i++){
+
+            Enemy enemy = new Enemy(getResources());
+            enemies[i] = enemy;
+
+        }
     }
 
     @Override
     public void run() {
         while (!isPaused){
-            update();
             draw();
+            update();
             sleep();
         }
     }
@@ -109,6 +119,17 @@ public class GameView extends SurfaceView implements Runnable{
 
             bullet.y -= (int) (20.0 * screenYRatio);
 
+            for(Enemy enemy : enemies){
+
+                if(Rect.intersects(enemy.getCollision(), bullet.getCollision())){
+                    bullet.y = screenSizeY - 5000;
+                    enemy.y = -enemy.enemyHeight;
+                    enemy.isDead = true;
+                    return;
+                }
+
+            }
+
         }
 
         for(Bullet bullet : bulletsToRemove){
@@ -117,6 +138,38 @@ public class GameView extends SurfaceView implements Runnable{
             }
         }
 
+        for(Enemy enemy : enemies){
+
+            enemy.y += (int) (enemy.speed * screenYRatio);
+
+            if(enemy.y < -enemy.enemyHeight - 500){
+
+                Random random = new Random();
+
+                enemy.y = -enemy.enemyHeight - random.nextInt(450);
+
+                //do{
+                    enemy.x = random.nextInt(screenSizeX - enemy.enemyWidth);
+                //}while(checkEnemyPositions(enemy));
+
+            }
+
+            if(Rect.intersects(enemy.getCollision(), player.getCollision())){
+                GameOver = true;
+                return;
+            }
+
+        }
+
+    }
+
+    private boolean checkEnemyPositions(Enemy currentEnemy){
+        for(Enemy enemy : enemies){
+            if(Rect.intersects(enemy.getCollision(), currentEnemy.getCollision())){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void draw(){
@@ -127,11 +180,21 @@ public class GameView extends SurfaceView implements Runnable{
             canvas.drawBitmap(bgStart.background, bgStart.x, bgStart.y, paint);
             canvas.drawBitmap(bgNext.background, bgNext.x, bgNext.y, paint);
 
+            if(GameOver){
+                isPaused = true;
+                return;
+            }
+
+            for(Enemy enemy : enemies){
+                canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
+            }
+
             canvas.drawBitmap(player.getPlayer(), player.x, player.y, paint);
 
             for(Bullet bullet : bullets) {
                 canvas.drawBitmap(bullet.bullet, bullet.x, bullet.y, paint);
             }
+
             getHolder().unlockCanvasAndPost(canvas);
 
         }
@@ -141,7 +204,7 @@ public class GameView extends SurfaceView implements Runnable{
     private void sleep(){
 
         try{
-            Thread.sleep(7);
+            Thread.sleep(3);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -159,6 +222,7 @@ public class GameView extends SurfaceView implements Runnable{
             player.movingRight = true;
             player.movingLeft = false;
         }
+
         if(event.getX() >= ((screenSizeX / 2) - player.playerWidth) - 10
                 &&  event.getX() <= ((screenSizeX / 2) + player.playerWidth) + 10){
             player.shots++;
@@ -170,6 +234,8 @@ public class GameView extends SurfaceView implements Runnable{
     public boolean onTouchEvent(MotionEvent event) {
 
         switch (event.getAction()){
+            case MotionEvent.ACTION_POINTER_DOWN:
+                return true;
             case MotionEvent.ACTION_DOWN:
                 doAction(event);
                 break;
@@ -185,7 +251,7 @@ public class GameView extends SurfaceView implements Runnable{
     public void newBullet() {
 
         Bullet bullet = new Bullet(getResources());
-        bullet.x = player.x + (player.playerWidth / 2) - 25;
+        bullet.x = (int) (screenXRatio * (player.x + (player.playerWidth / 2) - 25));
         bullet.y = player.y - player.playerHeight;
         bullets.add(bullet);
 

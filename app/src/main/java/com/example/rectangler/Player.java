@@ -3,6 +3,7 @@ package com.example.rectangler;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,7 @@ import java.util.ListIterator;
 public class Player {
 
     public boolean movingLeft, movingRight;
-    public int x, y, playerWidth, playerHeight, shots = 0, shotSeparator = 0;
+    public int x, y, playerWidth, playerHeight, shots = 0;
     private Bitmap player, bullet1, bullet2;
     private GameView gameView;
 
@@ -40,7 +41,7 @@ public class Player {
         bullet1 = Bitmap.createScaledBitmap(bullet1, bullet1.getWidth(), bullet1.getHeight(), false);
 
         bullet2 = BitmapFactory.decodeResource(resources, R.drawable.bullet);
-        bullet2 = Bitmap.createScaledBitmap(bullet1, bullet1.getWidth(), bullet1.getHeight(), false);
+        bullet2 = Bitmap.createScaledBitmap(bullet2, bullet2.getWidth(), bullet2.getHeight(), false);
 
         x = (screenX / 2) - (playerWidth / 2);
         y = (int) (gameView.screenSizeY - (playerHeight + 35));
@@ -50,24 +51,15 @@ public class Player {
     public Bitmap getPlayer(){
 
         if(shots != 0){
-
-            if(shotSeparator == 0)
-            {
-                shotSeparator++;
-                return bullet1;
-            }
-            else if(shotSeparator == 1){
-                shotSeparator++;
-                return bullet2;
-            }
-
-            shotSeparator = 0;
             shots--;
-
             gameView.newBullet();
         }
 
         return player;
+    }
+
+    public Rect getCollision(){
+        return new Rect(x, y, x + playerWidth, y + playerHeight);
     }
 
 }

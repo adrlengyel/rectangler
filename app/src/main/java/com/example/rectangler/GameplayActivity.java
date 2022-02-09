@@ -25,10 +25,6 @@ public class GameplayActivity extends AppCompatActivity {
 
         gameView = new GameView(this, displayMetrics.widthPixels, displayMetrics.heightPixels);
         setContentView(gameView);
-
-        music = MediaPlayer.create(GameplayActivity.this, R.raw.background_song);
-        music.setLooping(true);
-        //music.start();
     }
 
     @Override
@@ -42,6 +38,8 @@ public class GameplayActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         gameView.resume();
+        music = MediaPlayer.create(GameplayActivity.this, R.raw.background_song);
+        music.setLooping(true);
         music.start();
     }
 }

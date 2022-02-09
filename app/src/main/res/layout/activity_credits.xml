@@ -10,11 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imgUPJS"
             android:layout_width="200sp"
             android:layout_height="200sp"
-            android:background="@drawable/upjs_logo"/>
+            android:background="@drawable/upjs_logo" />
 
         <TextView
             android:id="@+id/tvUPJS"
@@ -28,7 +28,7 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imgSPSE"
             android:layout_width="200sp"
             android:layout_height="200sp"
