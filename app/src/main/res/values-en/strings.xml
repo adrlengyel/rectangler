@@ -11,4 +11,6 @@
     <string name="slovak">Slovak</string>
     <string name="saved_text">Changes have been saved</string>
     <string name="loading_text">10. ročník súťaže IHRA</string>
+    <string name="game_over">Game over</string>
+    <string name="main_menu">Main menu</string>
 </resources>

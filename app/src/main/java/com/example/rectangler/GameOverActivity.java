@@ -12,69 +12,82 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity {
+public class GameOverActivity extends AppCompatActivity {
 
-    private Button btnPlay, btnOptions, btnQuit, btnCredits;
-    private TextView tvTitle;
-    private String currentLanguageCode, filePath, fileName;
+    private Button btnQuitGame, btnMainMenu, btnReplay;
+    private TextView tvGameOver;
     private Context context;
     private Resources resources;
+    private String currentLanguageCode, filePath, fileName;
     private MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game_over);
+
         inicialize();
 
-        btnPlay.setOnClickListener(new View.OnClickListener() {
+        btnReplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                music.stop();
-                Intent intent = new Intent(MainActivity.this, GameplayActivity.class);
+                finish();
+                Intent intent = new Intent(GameOverActivity.this, GameplayActivity.class);
                 startActivity(intent);
             }
         });
 
-        btnOptions.setOnClickListener(new View.OnClickListener() {
+        btnMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
+                Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
-        btnCredits.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreditsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnQuit.setOnClickListener(new View.OnClickListener() {
+        btnQuitGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finishAffinity();
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(checkIfFileExists("config.txt")){
+            if(readFile()){
+                changeLocale();
+            }
+        }
+
+        music = MediaPlayer.create(GameOverActivity.this, R.raw.game_over);
+        music.setLooping(false);
+        music.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        music.stop();
     }
 
     private void inicialize(){
 
-        btnPlay = (Button) findViewById(R.id.btnPlay);
-        btnOptions = (Button) findViewById(R.id.btnOptions);
-        btnCredits = (Button) findViewById(R.id.btnCredits);
-        btnQuit = (Button) findViewById(R.id.btnQuit);
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        btnQuitGame = (Button) findViewById(R.id.btnQuitGame);
+        btnMainMenu = (Button) findViewById(R.id.btnMainMenu);
+        tvGameOver = (TextView) findViewById(R.id.tvGameOver);
+        btnReplay = (Button) findViewById(R.id.btnReplay);
 
     }
 
@@ -110,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeLocale(){
 
-        context = LocaleHelper.setLocale(MainActivity.this, currentLanguageCode);
+        context = LocaleHelper.setLocale(GameOverActivity.this, currentLanguageCode);
         resources = context.getResources();
         changeLanguage();
 
@@ -118,30 +131,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeLanguage(){
 
-        tvTitle.setText(resources.getString(R.string.app_name));
-        btnPlay.setText(resources.getString(R.string.play_button));
-        btnCredits.setText(resources.getString(R.string.credits_button));
-        btnOptions.setText(resources.getString(R.string.options_button));
-        btnQuit.setText(resources.getString(R.string.quit_button));
+        tvGameOver.setText(resources.getString(R.string.game_over));
+        btnQuitGame.setText(resources.getString(R.string.quit_button));
+        btnMainMenu.setText(resources.getString(R.string.main_menu));
+        btnReplay.setText(resources.getString(R.string.play_button));
 
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(checkIfFileExists("config.txt")){
-            if(readFile()){
-                changeLocale();
-            }
-        }
-        music = MediaPlayer.create(MainActivity.this, R.raw.mainmenu_song);
-        music.setLooping(true);
-        music.start();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        music.stop();
     }
 }

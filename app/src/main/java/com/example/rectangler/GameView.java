@@ -1,14 +1,21 @@
 package com.example.rectangler;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.ImageView;
 
+import androidx.annotation.RequiresApi;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +39,11 @@ public class GameView extends SurfaceView implements Runnable{
         this.screenSizeY = screenSizeY;
         screenYRatio = 1920f / (float)screenSizeY;
         screenXRatio = 1080f / (float)screenSizeX;
+
+        if(screenYRatio > 1){
+            screenYRatio = 1;
+            screenXRatio = 1;
+        }
 
         bgStart = new Background(screenSizeX, screenSizeY, getResources());
         bgNext = new Background(screenSizeX, screenSizeY, getResources());
@@ -123,7 +135,7 @@ public class GameView extends SurfaceView implements Runnable{
 
                 if(Rect.intersects(enemy.getCollision(), bullet.getCollision())){
                     bullet.y = screenSizeY - 5000;
-                    enemy.y = -enemy.enemyHeight;
+                    enemy.y = -enemy.enemyHeight - 800;
                     enemy.isDead = true;
                     return;
                 }
@@ -142,15 +154,15 @@ public class GameView extends SurfaceView implements Runnable{
 
             enemy.y += (int) (enemy.speed * screenYRatio);
 
-            if(enemy.y < -enemy.enemyHeight - 500){
+            if(enemy.y < -enemy.enemyHeight - 750){
 
                 Random random = new Random();
 
+                enemy.speed = random.nextInt(4) + 3;
                 enemy.y = -enemy.enemyHeight - random.nextInt(450);
-
-                //do{
-                    enemy.x = random.nextInt(screenSizeX - enemy.enemyWidth);
-                //}while(checkEnemyPositions(enemy));
+                enemy.x = random.nextInt(screenSizeX);
+                if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
+                else if((enemy.x + enemy.enemyWidth) >= screenSizeX) enemy.x = screenSizeX - enemy.enemyWidth;
 
             }
 
@@ -158,18 +170,7 @@ public class GameView extends SurfaceView implements Runnable{
                 GameOver = true;
                 return;
             }
-
         }
-
-    }
-
-    private boolean checkEnemyPositions(Enemy currentEnemy){
-        for(Enemy enemy : enemies){
-            if(Rect.intersects(enemy.getCollision(), currentEnemy.getCollision())){
-                return true;
-            }
-        }
-        return false;
     }
 
     private void draw(){
@@ -181,8 +182,11 @@ public class GameView extends SurfaceView implements Runnable{
             canvas.drawBitmap(bgNext.background, bgNext.x, bgNext.y, paint);
 
             if(GameOver){
-                isPaused = true;
-                return;
+
+                ((Activity) getContext()).finish();
+                Intent intent = new Intent(getContext(), GameOverActivity.class);
+                getContext().startActivity(intent);
+
             }
 
             for(Enemy enemy : enemies){

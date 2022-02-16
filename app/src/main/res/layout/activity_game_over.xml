@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameOverActivity"
+    android:background="@drawable/background"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvGameOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45sp"
+        android:text="@string/game_over"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pixel"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/btnReplay"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGameOver"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/pixel"
+        android:padding="20sp"
+        android:text="@string/play_button"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnMainMenu"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnReplay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/pixel"
+        android:padding="20sp"
+        android:text="@string/main_menu"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnQuitGame"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMainMenu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/pixel"
+        android:padding="20sp"
+        android:text="@string/quit_button"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>
