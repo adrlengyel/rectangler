@@ -38,7 +38,9 @@
         android:progressBackgroundTint="@color/black"
         android:progressTint="@color/black"
         android:thumb="@drawable/square"
-        android:thumbTint="@color/black"/>
+        android:thumbTint="@color/black"
+        android:max="50"
+        android:progress="25"/>
 
     <TextView
         android:id="@+id/tvLanguage"

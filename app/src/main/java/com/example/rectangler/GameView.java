@@ -41,8 +41,8 @@ public class GameView extends SurfaceView implements Runnable{
         screenXRatio = 1080f / (float)screenSizeX;
 
         if(screenYRatio > 1){
-            screenYRatio = 1;
-            screenXRatio = 1;
+            screenYRatio = 1f;
+            screenXRatio = 1f;
         }
 
         bgStart = new Background(screenSizeX, screenSizeY, getResources());
@@ -56,9 +56,9 @@ public class GameView extends SurfaceView implements Runnable{
         paint = new Paint();
 
         bullets = new ArrayList<Bullet>();
-        enemies = new Enemy[5];
+        enemies = new Enemy[7];
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 7; i++){
 
             Enemy enemy = new Enemy(getResources());
             enemies[i] = enemy;
@@ -69,8 +69,8 @@ public class GameView extends SurfaceView implements Runnable{
     @Override
     public void run() {
         while (!isPaused){
-            draw();
             update();
+            draw();
             sleep();
         }
     }
@@ -158,7 +158,7 @@ public class GameView extends SurfaceView implements Runnable{
 
                 Random random = new Random();
 
-                enemy.speed = random.nextInt(4) + 3;
+                enemy.speed = (random.nextInt(4) + 3) / screenYRatio;
                 enemy.y = -enemy.enemyHeight - random.nextInt(450);
                 enemy.x = random.nextInt(screenSizeX);
                 if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
@@ -208,7 +208,7 @@ public class GameView extends SurfaceView implements Runnable{
     private void sleep(){
 
         try{
-            Thread.sleep(3);
+            Thread.sleep(7);
         }
         catch (Exception e){
             e.printStackTrace();

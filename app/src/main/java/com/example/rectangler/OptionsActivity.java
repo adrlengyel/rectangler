@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class OptionsActivity extends AppCompatActivity {
@@ -32,6 +34,8 @@ public class OptionsActivity extends AppCompatActivity {
     private String filePath;
     private Context context;
     private Resources resources;
+    private SeekBar sbVolume;
+    private int volume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,14 +107,17 @@ public class OptionsActivity extends AppCompatActivity {
     private void saveSettings(){
 
         try {
+
+            volume = sbVolume.getProgress();
+
             OutputStreamWriter outputStreamWriter =
                     new OutputStreamWriter(getApplicationContext().openFileOutput("config.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(currentLanguageCode);
+            outputStreamWriter.write(currentLanguageCode + ";" + volume);
             outputStreamWriter.close();
 
         }
         catch (IOException e) {
-            Toast.makeText(OptionsActivity.this, "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(OptionsActivity.this, "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -123,7 +130,24 @@ public class OptionsActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String fileText = bufferedReader.readLine();
 
-            currentLanguageCode = fileText;
+            String[] settings = fileText.split(";");
+
+            for(int i = 0; i < settings.length; i++){
+
+                switch (i){
+                    case 0:
+                        currentLanguageCode = settings[i];
+                        break;
+                    case 1:
+                        volume = Integer.parseInt(settings[i]);
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            sbVolume.setProgress(volume);
             return true;
         }
         catch (Exception e){
@@ -169,6 +193,7 @@ public class OptionsActivity extends AppCompatActivity {
         tvOptions = (TextView) findViewById(R.id.tvOptions);
         tvVolume = (TextView) findViewById(R.id.tvVolume);
         tvLanguage = (TextView) findViewById(R.id.tvLanguage);
+        sbVolume = (SeekBar) findViewById(R.id.sbVolume);
 
     }
 

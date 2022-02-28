@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private Resources resources;
     private MediaPlayer music;
+    private int volume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,23 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String fileText = bufferedReader.readLine();
 
-            currentLanguageCode = fileText;
+            String[] settings = fileText.split(";");
+
+            for(int i = 0; i < settings.length; i++){
+
+                switch (i){
+                    case 0:
+                        currentLanguageCode = settings[i];
+                        break;
+                    case 1:
+                        volume = Integer.parseInt(settings[i]);
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
             return true;
         }
         catch (Exception e){
@@ -136,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         }
         music = MediaPlayer.create(MainActivity.this, R.raw.mainmenu_song);
         music.setLooping(true);
+        music.setVolume(volume / 50.0f, volume / 50.0f);
         music.start();
     }
 

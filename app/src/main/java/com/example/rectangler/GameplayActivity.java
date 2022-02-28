@@ -12,6 +12,7 @@ public class GameplayActivity extends AppCompatActivity {
 
     private GameView gameView;
     private MediaPlayer music;
+    private int volume = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class GameplayActivity extends AppCompatActivity {
         gameView.resume();
         music = MediaPlayer.create(GameplayActivity.this, R.raw.background_song);
         music.setLooping(true);
+        music.setVolume(volume / 50.0f, volume / 50.0f);
         music.start();
     }
 }

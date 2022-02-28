@@ -25,6 +25,7 @@ public class GameOverActivity extends AppCompatActivity {
     private Resources resources;
     private String currentLanguageCode, filePath, fileName;
     private MediaPlayer music;
+    private int volume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class GameOverActivity extends AppCompatActivity {
 
         music = MediaPlayer.create(GameOverActivity.this, R.raw.game_over);
         music.setLooping(false);
+        music.setVolume(volume / 50.0f, volume / 50.0f);
         music.start();
     }
 
@@ -100,7 +102,23 @@ public class GameOverActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String fileText = bufferedReader.readLine();
 
-            currentLanguageCode = fileText;
+            String[] settings = fileText.split(";");
+
+            for(int i = 0; i < settings.length; i++){
+
+                switch (i){
+                    case 0:
+                        currentLanguageCode = settings[i];
+                        break;
+                    case 1:
+                        volume = Integer.parseInt(settings[i]);
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
             return true;
         }
         catch (Exception e){
