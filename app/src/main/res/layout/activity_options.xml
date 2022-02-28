@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/CustomTheme"
     tools:context=".OptionsActivity">
 
     <TextView
@@ -66,8 +67,9 @@
             android:id="@+id/rbEnglish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
             android:fontFamily="@font/pixel"
+            android:textColor="@color/black"
+
             android:minHeight="48dp"
             android:text="@string/english" />
 
@@ -75,8 +77,8 @@
             android:id="@+id/rbSlovak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
             android:fontFamily="@font/pixel"
+            android:textColor="@color/black"
             android:minHeight="48dp"
             android:text="@string/slovak" />
 
