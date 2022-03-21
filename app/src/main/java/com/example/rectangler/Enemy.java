@@ -19,12 +19,12 @@ public class Enemy {
         enemyWidth = enemy.getWidth();
         enemyHeight = enemy.getHeight();
 
-        enemyWidth = (int) (enemyWidth * GameView.screenXRatio);
-        enemyHeight = (int) (enemyHeight * GameView.screenYRatio);
+        enemyWidth = (int) (enemyWidth / GameView.screenXRatio);
+        enemyHeight = (int) (enemyHeight / GameView.screenYRatio);
 
         enemy = Bitmap.createScaledBitmap(enemy, enemyWidth, enemyHeight, false);
 
-        y = -enemyHeight - 800;
+        y = -enemyHeight - 8000;
     }
 
     public Bitmap getEnemy(){

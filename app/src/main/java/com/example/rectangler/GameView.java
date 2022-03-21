@@ -56,9 +56,9 @@ public class GameView extends SurfaceView implements Runnable{
         paint = new Paint();
 
         bullets = new ArrayList<Bullet>();
-        enemies = new Enemy[7];
+        enemies = new Enemy[9];
 
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 9; i++){
 
             Enemy enemy = new Enemy(getResources());
             enemies[i] = enemy;
@@ -152,21 +152,25 @@ public class GameView extends SurfaceView implements Runnable{
 
         for(Enemy enemy : enemies){
 
-            enemy.y += (int) (enemy.speed * screenYRatio);
-
-            if(enemy.y < -enemy.enemyHeight - 750){
+            if(enemy.y < -enemy.enemyHeight - screenSizeY){
 
                 Random random = new Random();
 
-                enemy.speed = (random.nextInt(4) + 3) / screenYRatio;
-                enemy.y = -enemy.enemyHeight - random.nextInt(450);
+                enemy.speed = (random.nextInt(3) + 4);
+                enemy.y = -screenSizeY - random.nextInt(120);
                 enemy.x = random.nextInt(screenSizeX);
                 if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
                 else if((enemy.x + enemy.enemyWidth) >= screenSizeX) enemy.x = screenSizeX - enemy.enemyWidth;
-
             }
 
+            enemy.y += (int) (enemy.speed / screenYRatio);
+
             if(Rect.intersects(enemy.getCollision(), player.getCollision())){
+                GameOver = true;
+                return;
+            }
+
+            if(enemy.y >= screenSizeY){
                 GameOver = true;
                 return;
             }
@@ -181,16 +185,16 @@ public class GameView extends SurfaceView implements Runnable{
             canvas.drawBitmap(bgStart.background, bgStart.x, bgStart.y, paint);
             canvas.drawBitmap(bgNext.background, bgNext.x, bgNext.y, paint);
 
+            for(Enemy enemy : enemies){
+                canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
+            }
+
             if(GameOver){
 
                 ((Activity) getContext()).finish();
                 Intent intent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(intent);
 
-            }
-
-            for(Enemy enemy : enemies){
-                canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
             }
 
             canvas.drawBitmap(player.getPlayer(), player.x, player.y, paint);
@@ -208,7 +212,7 @@ public class GameView extends SurfaceView implements Runnable{
     private void sleep(){
 
         try{
-            Thread.sleep(7);
+            Thread.sleep((long)(2));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -255,8 +259,8 @@ public class GameView extends SurfaceView implements Runnable{
     public void newBullet() {
 
         Bullet bullet = new Bullet(getResources());
-        bullet.x = (int) (screenXRatio * (player.x + (player.playerWidth / 2) - 25));
-        bullet.y = player.y - player.playerHeight;
+        bullet.x = (int) ((player.x + (player.playerWidth / 2)) - (30 / screenXRatio));
+        bullet.y = (player.y - player.playerHeight) - (20 / screenSizeY);
         bullets.add(bullet);
 
     }

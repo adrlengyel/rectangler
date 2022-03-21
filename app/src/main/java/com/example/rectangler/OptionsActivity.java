@@ -38,12 +38,17 @@ public class OptionsActivity extends AppCompatActivity {
     private int volume;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        checkSave();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
         inicializeViews();
-        checkSave();
 
         if(rgLanguage.getCheckedRadioButtonId() == R.id.rbSlovak)
             context = LocaleHelper.setLocale(OptionsActivity.this, "sk");
@@ -101,6 +106,7 @@ public class OptionsActivity extends AppCompatActivity {
         else {
             rgLanguage.check(R.id.rbEnglish);
         }
+        sbVolume.setProgress(volume);
 
     }
 
