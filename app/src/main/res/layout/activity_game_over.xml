@@ -8,10 +8,24 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="65sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/score"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pixel"
+        android:textSize="30sp"
+        />
+
+    <TextView
         android:id="@+id/tvGameOver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvScore"
         android:layout_marginBottom="45sp"
         android:text="@string/game_over"
         android:textAlignment="center"

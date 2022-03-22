@@ -31,6 +31,7 @@ public class GameView extends SurfaceView implements Runnable{
     private Paint paint;
     private List<Bullet> bullets;
     private Enemy[] enemies;
+    private int score = 0;
 
     public GameView(Context context, int screenSizeX, int screenSizeY) {
         super(context);
@@ -135,8 +136,9 @@ public class GameView extends SurfaceView implements Runnable{
 
                 if(Rect.intersects(enemy.getCollision(), bullet.getCollision())){
                     bullet.y = screenSizeY - 5000;
-                    enemy.y = -enemy.enemyHeight - 800;
+                    enemy.y = -enemy.enemyHeight - screenSizeY - 500;
                     enemy.isDead = true;
+                    score++;
                     return;
                 }
 
@@ -156,8 +158,8 @@ public class GameView extends SurfaceView implements Runnable{
 
                 Random random = new Random();
 
-                enemy.speed = (random.nextInt(3) + 4);
-                enemy.y = -screenSizeY - random.nextInt(120);
+                enemy.speed = (random.nextInt(3) + 4) / screenYRatio;
+                enemy.y = -enemy.enemyHeight - random.nextInt(120);
                 enemy.x = random.nextInt(screenSizeX);
                 if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
                 else if((enemy.x + enemy.enemyWidth) >= screenSizeX) enemy.x = screenSizeX - enemy.enemyWidth;
@@ -193,6 +195,7 @@ public class GameView extends SurfaceView implements Runnable{
 
                 ((Activity) getContext()).finish();
                 Intent intent = new Intent(getContext(), GameOverActivity.class);
+                intent.putExtra("score", score);
                 getContext().startActivity(intent);
 
             }

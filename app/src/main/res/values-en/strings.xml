@@ -13,4 +13,5 @@
     <string name="loading_text">10. ročník súťaže IHRA</string>
     <string name="game_over">Game over</string>
     <string name="main_menu">Main menu</string>
+    <string name="score">Score: </string>
 </resources>

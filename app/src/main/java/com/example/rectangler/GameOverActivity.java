@@ -20,12 +20,12 @@ import java.io.InputStreamReader;
 public class GameOverActivity extends AppCompatActivity {
 
     private Button btnQuitGame, btnMainMenu, btnReplay;
-    private TextView tvGameOver;
+    private TextView tvGameOver, tvScore;
     private Context context;
     private Resources resources;
     private String currentLanguageCode, filePath, fileName;
     private MediaPlayer music;
-    private int volume;
+    private int volume, score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,13 @@ public class GameOverActivity extends AppCompatActivity {
             }
         }
 
+        if(getIntent().getExtras() != null){
+
+            score = getIntent().getIntExtra("score", 0);
+            tvScore.append(Integer.toString(score));
+
+        }
+
         music = MediaPlayer.create(GameOverActivity.this, R.raw.game_over);
         music.setLooping(false);
         music.setVolume(volume / 50.0f, volume / 50.0f);
@@ -86,6 +93,7 @@ public class GameOverActivity extends AppCompatActivity {
 
     private void inicialize(){
 
+        tvScore = (TextView)findViewById(R.id.tvScore);
         btnQuitGame = (Button) findViewById(R.id.btnQuitGame);
         btnMainMenu = (Button) findViewById(R.id.btnMainMenu);
         tvGameOver = (TextView) findViewById(R.id.tvGameOver);
@@ -153,7 +161,7 @@ public class GameOverActivity extends AppCompatActivity {
         btnQuitGame.setText(resources.getString(R.string.quit_button));
         btnMainMenu.setText(resources.getString(R.string.main_menu));
         btnReplay.setText(resources.getString(R.string.play_button));
-
+        tvScore.setText(resources.getString(R.string.score));
 
     }
 }

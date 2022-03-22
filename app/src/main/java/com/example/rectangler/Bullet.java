@@ -16,10 +16,10 @@ public class Bullet {
         bulletWidth = bullet.getWidth();
         bulletHeight = bullet.getHeight();
 
-        bulletWidth = (int) (bulletWidth * GameView.screenXRatio);
-        bulletHeight = (int) (bulletHeight * GameView.screenYRatio);
+        bulletWidth = (int) (bulletWidth / GameView.screenXRatio);
+        bulletHeight = (int) (bulletHeight / GameView.screenYRatio);
 
-        bullet = Bitmap.createScaledBitmap(bullet, bullet.getWidth(), bullet.getHeight(), false);
+        bullet = Bitmap.createScaledBitmap(bullet, bulletWidth, bulletHeight, false);
     }
 
     public Rect getCollision(){

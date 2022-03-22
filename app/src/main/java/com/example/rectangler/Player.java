@@ -32,8 +32,8 @@ public class Player {
         playerWidth = player.getWidth();
         playerHeight = player.getHeight();
 
-        playerWidth = (int) (playerWidth * GameView.screenXRatio);
-        playerHeight = (int) (playerHeight * GameView.screenYRatio);
+        playerWidth = (int) (playerWidth / GameView.screenXRatio);
+        playerHeight = (int) (playerHeight / GameView.screenYRatio);
 
         player = Bitmap.createScaledBitmap(player, playerWidth, playerHeight, false);
 
