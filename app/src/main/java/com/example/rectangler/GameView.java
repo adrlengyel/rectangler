@@ -136,7 +136,7 @@ public class GameView extends SurfaceView implements Runnable{
 
                 if(Rect.intersects(enemy.getCollision(), bullet.getCollision())){
                     bullet.y = screenSizeY - 5000;
-                    enemy.y = -enemy.enemyHeight - screenSizeY - 500;
+                    enemy.y = -enemy.enemyHeight - 9000;
                     enemy.isDead = true;
                     score++;
                     return;
@@ -158,7 +158,7 @@ public class GameView extends SurfaceView implements Runnable{
 
                 Random random = new Random();
 
-                enemy.speed = (random.nextInt(3) + 4) / screenYRatio;
+                enemy.speed = (random.nextInt(3) + 4 + (score / 10)) / screenYRatio;
                 enemy.y = -enemy.enemyHeight - random.nextInt(120);
                 enemy.x = random.nextInt(screenSizeX);
                 if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
