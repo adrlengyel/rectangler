@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -116,13 +114,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkIfFileExists(String fileName){
 
         this.fileName = fileName;
-        filePath = getApplicationContext().getFilesDir().getPath().toString() + "/" + fileName;
+        filePath = getApplicationContext().getFilesDir().getPath() + "/" + fileName;
 
         File file = new File(filePath);
-        if(file.exists())
-            return true;
-
-        return false;
+        return file.exists();
     }
 
     private void changeLocale(){

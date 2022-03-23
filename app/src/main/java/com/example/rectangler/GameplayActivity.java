@@ -2,7 +2,6 @@ package com.example.rectangler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -79,13 +78,10 @@ public class GameplayActivity extends AppCompatActivity {
     private boolean checkIfFileExists(String fileName){
 
         this.fileName = fileName;
-        filePath = getApplicationContext().getFilesDir().getPath().toString() + "/" + fileName;
+        filePath = getApplicationContext().getFilesDir().getPath() + "/" + fileName;
 
         File file = new File(filePath);
-        if(file.exists())
-            return true;
-
-        return false;
+        return file.exists();
     }
 
     @Override

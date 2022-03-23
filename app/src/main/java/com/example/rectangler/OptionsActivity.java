@@ -17,10 +17,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class OptionsActivity extends AppCompatActivity {
@@ -181,13 +179,10 @@ public class OptionsActivity extends AppCompatActivity {
     private boolean checkIfFileExists(String fileName){
 
         this.fileName = fileName;
-        filePath = getApplicationContext().getFilesDir().getPath().toString() + "/" + fileName;
+        filePath = getApplicationContext().getFilesDir().getPath() + "/" + fileName;
 
         File file = new File(filePath);
-        if(file.exists())
-            return true;
-
-        return false;
+        return file.exists();
     }
 
     private void inicializeViews(){

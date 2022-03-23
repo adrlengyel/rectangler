@@ -8,7 +8,7 @@ import android.graphics.Rect;
 public class Enemy {
 
     public boolean isDead = false;
-    public int x, y, enemyWidth, enemyHeight, shots = 0;
+    public int x, y, enemyWidth, enemyHeight;
     public float speed = 5f;
     private Bitmap enemy;
 
