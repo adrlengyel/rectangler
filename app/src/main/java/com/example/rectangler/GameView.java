@@ -98,8 +98,8 @@ public class GameView extends SurfaceView implements Runnable{
 
     private void update(){
 
-        bgStart.y -= (int) (4.0 * screenYRatio);
-        bgNext.y -= (int) (4.0 * screenYRatio);
+        bgStart.y -= (int) (4.0 / screenYRatio);
+        bgNext.y -= (int) (4.0 / screenYRatio);
 
         if(bgStart.y + bgStart.background.getHeight() < 0){
             bgStart.y = screenSizeY;
@@ -110,9 +110,9 @@ public class GameView extends SurfaceView implements Runnable{
         }
 
         if(player.movingLeft){
-            player.x -= (int) (20.0 * screenXRatio);
+            player.x -= (int) (20.0 / screenXRatio);
         } else if (player.movingRight) {
-            player.x += (int) (20.0 * screenXRatio);
+            player.x += (int) (20.0 / screenXRatio);
         }
 
         if(player.x < 0){
@@ -130,7 +130,7 @@ public class GameView extends SurfaceView implements Runnable{
                 bulletsToRemove.add(bullet);
             }
 
-            bullet.y -= (int) (20.0 * screenYRatio);
+            bullet.y -= (int) (20.0 / screenYRatio);
 
             for(Enemy enemy : enemies){
 
