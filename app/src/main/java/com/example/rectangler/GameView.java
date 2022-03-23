@@ -154,12 +154,18 @@ public class GameView extends SurfaceView implements Runnable{
 
         for(Enemy enemy : enemies){
 
-            if(enemy.y < -enemy.enemyHeight - screenSizeY){
+            if(enemy.y < -enemy.enemyHeight - (screenSizeY + 450)){
 
                 Random random = new Random();
 
-                enemy.speed = (random.nextInt(3) + 4 + (score / 10)) / screenYRatio;
-                enemy.y = -enemy.enemyHeight - random.nextInt(120);
+                if(score <= 30) {
+                    enemy.speed = (random.nextInt(4) + 2 + (score / 10));
+                }
+                else {
+                    enemy.speed = (random.nextInt(4) + 5);
+                }
+
+                enemy.y = -(screenSizeY / 3) + random.nextInt(120);
                 enemy.x = random.nextInt(screenSizeX);
                 if ((enemy.x + enemy.enemyWidth) <= enemy.enemyWidth) enemy.x = enemy.x + enemy.enemyWidth;
                 else if((enemy.x + enemy.enemyWidth) >= screenSizeX) enemy.x = screenSizeX - enemy.enemyWidth;
