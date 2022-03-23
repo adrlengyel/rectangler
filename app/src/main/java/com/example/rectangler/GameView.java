@@ -1,25 +1,20 @@
 package com.example.rectangler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.widget.ImageView;
-
-import androidx.annotation.RequiresApi;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//SuppressLint ignoruje warning, ktory vznika kvoli tomu, ze nie je vytvoreny jedno a 2 parametricky konstruktor
+@SuppressLint("ViewConstructor")
 public class GameView extends SurfaceView implements Runnable{
 
     private Thread thread;
@@ -56,7 +51,7 @@ public class GameView extends SurfaceView implements Runnable{
 
         paint = new Paint();
 
-        bullets = new ArrayList<Bullet>();
+        bullets = new ArrayList<>();
         enemies = new Enemy[9];
 
         for(int i = 0; i < 9; i++){
@@ -123,7 +118,7 @@ public class GameView extends SurfaceView implements Runnable{
             player.x = screenSizeX - player.playerWidth;
         }
 
-        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        List<Bullet> bulletsToRemove = new ArrayList<>();
 
         for(Bullet bullet : bullets){
             if(bullet.y > screenSizeY){
@@ -159,7 +154,7 @@ public class GameView extends SurfaceView implements Runnable{
                 Random random = new Random();
 
                 if(score <= 30) {
-                    enemy.speed = (random.nextInt(4) + 2 + (score / 10));
+                    enemy.speed = (random.nextInt(4) + 2 + (int)(score / 10));
                 }
                 else {
                     enemy.speed = (random.nextInt(4) + 5);
@@ -231,22 +226,24 @@ public class GameView extends SurfaceView implements Runnable{
 
     private void doAction(MotionEvent event){
 
-        if(event.getX() < screenSizeX / 2 - player.playerWidth){
+        if(event.getX() < (float)(screenSizeX / 2) - player.playerWidth){
             player.movingLeft = true;
             player.movingRight = false;
         }
-        else if(event.getX() > screenSizeX / 2 + player.playerWidth){
+        else if(event.getX() > (float)(screenSizeX / 2) + player.playerWidth){
             player.movingRight = true;
             player.movingLeft = false;
         }
 
-        if(event.getX() >= ((screenSizeX / 2) - player.playerWidth) - 10
-                &&  event.getX() <= ((screenSizeX / 2) + player.playerWidth) + 10){
+        if(event.getX() >= ((float)(screenSizeX / 2) - player.playerWidth) - 10
+                &&  event.getX() <= ((float)(screenSizeX / 2) + player.playerWidth) + 10){
             player.shots++;
         }
 
     }
 
+    //SuppressLint ignoruje warning, ktory vznika pouzivanim onTouchEventu
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 

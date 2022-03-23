@@ -138,13 +138,10 @@ public class GameOverActivity extends AppCompatActivity {
     private boolean checkIfFileExists(String fileName){
 
         this.fileName = fileName;
-        filePath = getApplicationContext().getFilesDir().getPath().toString() + "/" + fileName;
+        filePath = getApplicationContext().getFilesDir().getPath() + "/" + fileName;
 
         File file = new File(filePath);
-        if(file.exists())
-            return true;
-
-        return false;
+        return file.exists();
     }
 
     private void changeLocale(){
